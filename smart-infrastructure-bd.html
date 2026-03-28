@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Infrastructure Bangladesh Consortium | Piezoelectric Energy</title>
+<style>
+:root {
+  --bg: #f0f6ff;
+  --bg2: #e8f4ff;
+  --navy: #0d47a1;
+  --blue: #1565c0;
+  --blue-light: #1976d2;
+  --sky: #29b6f6;
+  --electric: #0288d1;
+  --neon: #00c853;
+  --green: #2e7d32;
+  --green-light: #43a047;
+  --teal: #00897b;
+  --text: #1a237e;
+  --text2: #37474f;
+  --muted: #546e7a;
+  --card: rgba(255,255,255,0.9);
+  --border: rgba(13,71,161,0.15);
+  --shadow: 0 4px 24px rgba(13,71,161,0.10);
+  --shadow-lg: 0 8px 40px rgba(13,71,161,0.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--bg);color:var(--text2);font-family:Arial,Helvetica,sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(13,71,161,0.07) 1px,transparent 1px);background-size:36px 36px;pointer-events:none;z-index:0;}
+
+h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(2.5rem,6vw,4.8rem);font-weight:900;line-height:1.1;letter-spacing:-0.01em;}
+h2{font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.15;}
+h3{font-family:Arial,Helvetica,sans-serif;font-size:clamp(1.2rem,2.5vw,1.6rem);font-weight:700;}
+h4{font-family:Arial,Helvetica,sans-serif;font-size:1.05rem;font-weight:700;}
+h5{font-family:Arial,Helvetica,sans-serif;font-weight:700;}
+.label{font-family:Arial,Helvetica,sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--electric);}
+
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;}
+.section{padding:6rem 0;position:relative;}
+.section-alt{background:linear-gradient(180deg,#e3f2fd 0%,#f0f6ff 100%);}
+.section-green{background:linear-gradient(180deg,#e8f5e9 0%,#f0f6ff 100%);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.94);backdrop-filter:blur(20px);border-bottom:2px solid rgba(13,71,161,0.1);box-shadow:0 2px 20px rgba(13,71,161,0.08);transition:all 0.3s;}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--navy),var(--sky));clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-size:1.2rem;animation:pulse-logo 3s ease-in-out infinite;}
+@keyframes pulse-logo{0%,100%{box-shadow:0 0 0 0 rgba(13,71,161,0.3)}50%{box-shadow:0 0 16px 4px rgba(13,71,161,0.15)}}
+.logo-text{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:1.05rem;color:var(--navy);line-height:1.1;}
+.logo-text span{display:block;font-size:0.58rem;font-weight:700;color:var(--electric);letter-spacing:0.12em;text-transform:uppercase;}
+.nav-links{display:flex;gap:0.1rem;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--text2);font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.4rem 0.85rem;border-radius:6px;transition:all 0.22s;}
+.nav-links a:hover{color:var(--navy);background:rgba(13,71,161,0.07);}
+.nav-cta{background:linear-gradient(135deg,var(--navy),var(--blue-light)) !important;color:#fff !important;border-radius:6px !important;padding:0.5rem 1.2rem !important;}
+.nav-cta:hover{opacity:0.9;transform:translateY(-1px);box-shadow:0 4px 16px rgba(13,71,161,0.35) !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:24px;height:2.5px;background:var(--navy);border-radius:2px;transition:all 0.3s;}
+
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(240,246,255,0.97);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:Arial,Helvetica,sans-serif;font-size:1.8rem;font-weight:900;color:var(--navy);text-decoration:none;}
+.mobile-menu a:hover{color:var(--electric);}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;cursor:pointer;color:var(--muted);}
+
+/* BUTTONS */
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,var(--navy),var(--blue-light));color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:8px;text-decoration:none;transition:all 0.3s;position:relative;overflow:hidden;border:none;cursor:pointer;}
+.btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);transition:0.5s;}
+.btn-primary:hover::before{left:100%;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(13,71,161,0.35);}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;border:2px solid var(--navy);color:var(--navy);font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.83rem 2rem;border-radius:8px;text-decoration:none;transition:all 0.3s;background:transparent;}
+.btn-secondary:hover{background:var(--navy);color:#fff;transform:translateY(-2px);box-shadow:0 8px 28px rgba(13,71,161,0.2);}
+.btn-green{background:linear-gradient(135deg,var(--green),var(--green-light));color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em;padding:0.7rem 1.5rem;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;border:none;transition:all 0.3s;cursor:pointer;}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(46,125,50,0.3);}
+.btn-white{display:inline-flex;align-items:center;gap:0.5rem;background:#fff;color:var(--navy);font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:8px;text-decoration:none;transition:all 0.3s;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.2);}
+.btn-outline-white{display:inline-flex;align-items:center;gap:0.5rem;border:2px solid rgba(255,255,255,0.7);color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.83rem 2rem;border-radius:8px;text-decoration:none;transition:all 0.3s;}
+.btn-outline-white:hover{background:rgba(255,255,255,0.12);transform:translateY(-2px);}
+
+/* HERO */
+#home{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px;}
+.hero-image-bg{position:absolute;inset:0;background:linear-gradient(to right,rgba(240,246,255,0.97) 42%,rgba(240,246,255,0.7) 72%,rgba(240,246,255,0.25) 100%),url('https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1600&q=80') center/cover no-repeat;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(240,246,255,0.85) 100%);}
+.hero-content{position:relative;z-index:2;max-width:700px;}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(13,71,161,0.08);border:1.5px solid rgba(13,71,161,0.2);border-radius:4px;padding:0.35rem 1rem;margin-bottom:1.5rem;animation:fadeInDown 0.8s ease both;}
+.badge-dot{width:7px;height:7px;background:var(--neon);border-radius:50%;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-title{animation:fadeInUp 0.9s ease 0.2s both;margin-bottom:1rem;color:var(--navy);}
+.hero-title .accent{display:block;background:linear-gradient(90deg,var(--electric),var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:1.1rem;color:var(--text2);max-width:560px;margin-bottom:2rem;animation:fadeInUp 0.9s ease 0.4s both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeInUp 0.9s ease 0.6s both;}
+.hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:3rem;padding-top:2rem;border-top:2px solid rgba(13,71,161,0.12);animation:fadeInUp 0.9s ease 0.8s both;}
+.stat-num{font-family:Arial,Helvetica,sans-serif;font-size:2.2rem;font-weight:900;color:var(--navy);line-height:1;}
+.stat-unit{color:var(--neon);font-size:1.3rem;font-weight:900;}
+.stat-label{font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-weight:700;margin-top:0.15rem;}
+
+/* SECTION HEADER */
+.section-header{text-align:center;margin-bottom:4rem;}
+.section-header .label{display:block;margin-bottom:0.75rem;}
+.section-header h2{color:var(--navy);margin-bottom:1rem;}
+.section-header p{color:var(--muted);max-width:560px;margin:0 auto;font-size:1rem;}
+.divider{width:56px;height:4px;background:linear-gradient(90deg,var(--navy),var(--neon));margin:1.5rem auto 0;border-radius:2px;}
+
+/* IMAGE STRIP */
+.img-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;height:280px;overflow:hidden;border-radius:14px;box-shadow:var(--shadow-lg);margin-top:-1rem;margin-bottom:3rem;}
+.img-strip-item{position:relative;overflow:hidden;}
+.img-strip-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;}
+.img-strip-item:hover img{transform:scale(1.08);}
+.img-strip-item .img-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(13,71,161,0.85) 0%,transparent 100%);color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;padding:1.5rem 0.75rem 0.6rem;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+.vm-card{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:1.25rem;box-shadow:var(--shadow);}
+.vm-card h4{color:var(--navy);margin-bottom:0.4rem;font-size:0.9rem;}
+.vm-card p{font-size:0.83rem;color:var(--muted);}
+.about-img-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:0.75rem;height:400px;}
+.about-img{border-radius:10px;overflow:hidden;box-shadow:var(--shadow-lg);}
+.about-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;}
+.about-img:hover img{transform:scale(1.05);}
+.about-img-tall{grid-row:span 2;}
+
+/* TECH */
+.tech-diagram-wrap{background:linear-gradient(135deg,#e3f2fd,#f0f6ff);border:1.5px solid rgba(13,71,161,0.15);border-radius:14px;padding:2.5rem;margin-bottom:3rem;text-align:center;box-shadow:var(--shadow);}
+.tech-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(13,71,161,0.1);border-radius:10px;overflow:hidden;margin-bottom:3rem;}
+.flow-step{background:#fff;padding:2rem 1.5rem;text-align:center;transition:background 0.3s;}
+.flow-step:hover{background:#e3f2fd;}
+.flow-num{font-family:Arial,Helvetica,sans-serif;font-size:0.65rem;font-weight:700;color:var(--electric);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;display:block;}
+.flow-icon{font-size:2.4rem;margin-bottom:0.75rem;display:block;}
+.flow-step h4{color:var(--navy);margin-bottom:0.4rem;font-size:0.95rem;}
+.flow-step p{font-size:0.82rem;color:var(--muted);}
+.tech-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.benefit-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:1.75rem;box-shadow:var(--shadow);transition:all 0.3s;position:relative;overflow:hidden;}
+.benefit-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:linear-gradient(180deg,var(--navy),var(--neon));transition:height 0.4s;border-radius:0 0 2px 2px;}
+.benefit-card:hover::before{height:100%;}
+.benefit-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(13,71,161,0.3);}
+.benefit-icon{font-size:2rem;margin-bottom:0.75rem;}
+.benefit-card h4{color:var(--navy);margin-bottom:0.4rem;}
+.benefit-card p{font-size:0.84rem;color:var(--muted);}
+
+/* APPLICATIONS */
+.apps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+.app-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:all 0.35s;}
+.app-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(13,71,161,0.3);}
+.app-thumb{height:210px;overflow:hidden;position:relative;}
+.app-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;}
+.app-card:hover .app-thumb img{transform:scale(1.07);}
+.app-thumb-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,71,161,0.5) 0%,transparent 60%);}
+.app-thumb-icon{position:absolute;top:1rem;left:1rem;font-size:2rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.3));}
+.app-body{padding:1.5rem;}
+.app-body h3{color:var(--navy);font-size:1.15rem;margin-bottom:0.6rem;}
+.app-body p{font-size:0.86rem;color:var(--muted);margin-bottom:1rem;}
+.app-specs{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.spec-tag{background:rgba(13,71,161,0.07);border:1px solid rgba(13,71,161,0.18);border-radius:4px;padding:0.18rem 0.6rem;font-size:0.7rem;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--navy);letter-spacing:0.05em;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.project-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:all 0.35s;}
+.project-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(13,71,161,0.3);}
+.project-thumb{height:165px;position:relative;overflow:hidden;}
+.project-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s;}
+.project-card:hover .project-thumb img{transform:scale(1.08);}
+.project-thumb-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,71,161,0.55) 0%,transparent 60%);}
+.project-body{padding:1.4rem;}
+.project-status{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.68rem;font-family:Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;padding:0.2rem 0.6rem;border-radius:4px;}
+.status-concept{color:var(--electric);background:rgba(2,136,209,0.1);border:1px solid rgba(2,136,209,0.25);}
+.status-pilot{color:var(--green);background:rgba(46,125,50,0.1);border:1px solid rgba(46,125,50,0.25);}
+.project-body h4{color:var(--navy);margin-bottom:0.5rem;font-size:0.97rem;}
+.project-body p{font-size:0.82rem;color:var(--muted);}
+.project-meta{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap;}
+.project-meta span{font-size:0.7rem;color:var(--electric);font-weight:700;display:flex;align-items:center;gap:0.3rem;}
+.project-meta span::before{content:'◆';font-size:0.45rem;}
+
+/* WHY BD */
+.why-bd-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.why-list{list-style:none;}
+.why-list li{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1.5px solid rgba(13,71,161,0.08);}
+.why-list li:last-child{border-bottom:none;}
+.why-check{width:26px;height:26px;background:linear-gradient(135deg,var(--navy),var(--sky));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:#fff;font-weight:900;flex-shrink:0;margin-top:2px;}
+.why-list h4{color:var(--navy);margin-bottom:0.2rem;}
+.why-list p{font-size:0.84rem;color:var(--muted);}
+.why-infographic{background:linear-gradient(135deg,#e3f2fd,#f3e5f5);border:1.5px solid rgba(13,71,161,0.15);border-radius:14px;padding:2rem;box-shadow:var(--shadow);}
+.infographic-title{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:1rem;color:var(--navy);margin-bottom:1.5rem;text-align:center;letter-spacing:0.04em;}
+.bar-chart{display:flex;flex-direction:column;gap:1rem;}
+.bar-label{display:flex;justify-content:space-between;font-size:0.77rem;color:var(--text2);margin-bottom:0.35rem;font-weight:700;}
+.bar-label span:last-child{color:var(--electric);}
+.bar-track{height:10px;background:rgba(13,71,161,0.1);border-radius:6px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--navy),var(--sky));animation:barGrow 1.5s ease both;}
+@keyframes barGrow{from{width:0 !important}}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+.service-card{display:flex;gap:1.25rem;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:1.75rem;box-shadow:var(--shadow);transition:all 0.3s;align-items:flex-start;}
+.service-card:hover{border-color:rgba(13,71,161,0.3);background:#e8f4ff;transform:translateX(4px);box-shadow:var(--shadow-lg);}
+.service-icon{width:50px;height:50px;background:linear-gradient(135deg,rgba(13,71,161,0.12),rgba(41,182,246,0.1));border:1.5px solid rgba(13,71,161,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.service-content h4{color:var(--navy);margin-bottom:0.4rem;}
+.service-content p{font-size:0.84rem;color:var(--muted);}
+
+/* CTA BAND */
+.cta-band{position:relative;padding:5.5rem 0;text-align:center;overflow:hidden;background:linear-gradient(to right,rgba(13,71,161,0.9),rgba(21,101,192,0.87)),url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80') center/cover no-repeat;}
+.cta-band h2{color:#fff;margin-bottom:1rem;}
+.cta-band p{color:rgba(255,255,255,0.8);max-width:520px;margin:0 auto 2rem;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;}
+.contact-info h3{color:var(--navy);margin-bottom:1.5rem;}
+.contact-detail{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+.contact-icon{width:44px;height:44px;background:linear-gradient(135deg,rgba(13,71,161,0.1),rgba(41,182,246,0.08));border:1.5px solid rgba(13,71,161,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.contact-detail-text label{display:block;font-size:0.68rem;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--electric);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;}
+.contact-detail-text span{color:var(--text2);font-size:0.9rem;}
+.contact-form{background:linear-gradient(135deg,#e3f2fd,#fff);border:1.5px solid var(--border);border-radius:14px;padding:2.5rem;box-shadow:var(--shadow);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{margin-bottom:1.25rem;}
+.form-group label{display:block;font-size:0.72rem;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--navy);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,0.9);border:1.5px solid rgba(13,71,161,0.2);border-radius:8px;padding:0.75rem 1rem;color:var(--text2);font-family:Arial,Helvetica,sans-serif;font-size:0.9rem;transition:border-color 0.25s;outline:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--navy);background:#fff;box-shadow:0 0 0 3px rgba(13,71,161,0.08);}
+.form-group textarea{resize:vertical;min-height:120px;}
+.form-submit{width:100%;padding:0.9rem;font-size:1rem;}
+
+/* DOWNLOAD */
+.download-card{background:linear-gradient(135deg,#e8f5e9,#e3f2fd);border:1.5px solid rgba(46,125,50,0.2);border-radius:14px;padding:2.5rem;display:flex;align-items:center;gap:2rem;margin-top:3rem;flex-wrap:wrap;box-shadow:var(--shadow);}
+.download-icon{font-size:3rem;}
+.download-text h4{color:var(--navy);margin-bottom:0.4rem;}
+.download-text p{color:var(--muted);font-size:0.85rem;}
+.download-btns{margin-left:auto;display:flex;gap:0.75rem;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,0.85);padding:4rem 0 2rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand p{color:rgba(255,255,255,0.6);font-size:0.84rem;margin:1rem 0 1.5rem;max-width:280px;}
+.footer-social{display:flex;gap:0.75rem;}
+.social-btn{width:36px;height:36px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.85rem;text-decoration:none;color:rgba(255,255,255,0.7);transition:all 0.25s;font-weight:700;}
+.social-btn:hover{background:rgba(255,255,255,0.2);color:#fff;}
+.footer-col h5{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:1rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:0.6rem;}
+.footer-col ul a{text-decoration:none;color:rgba(255,255,255,0.72);font-size:0.85rem;transition:color 0.25s;}
+.footer-col ul a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.12);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;}
+.footer-bottom p{font-size:0.8rem;color:rgba(255,255,255,0.5);}
+.footer-logo-text{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-size:1.05rem;color:#fff;line-height:1.1;}
+.footer-logo-text span{display:block;font-size:0.58rem;font-weight:700;color:var(--sky);letter-spacing:0.12em;text-transform:uppercase;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .tech-flow{grid-template-columns:repeat(2,1fr);}
+  .projects-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .img-strip{grid-template-columns:repeat(2,1fr);height:auto;}
+  .img-strip-item{height:200px;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .about-grid,.why-bd-grid,.contact-grid{grid-template-columns:1fr;}
+  .about-img-grid{grid-template-columns:1fr 1fr;height:auto;}
+  .about-img-tall{grid-row:auto;}
+  .about-img img,.about-img-tall img{height:160px;}
+  .apps-grid,.services-grid{grid-template-columns:1fr;}
+  .tech-flow{grid-template-columns:1fr;}
+  .tech-benefits{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .hero-stats{gap:1.5rem;}
+  .vm-grid{grid-template-columns:1fr;}
+  .download-card{flex-direction:column;align-items:flex-start;}
+  .download-btns{margin-left:0;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .img-strip{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" onclick="closeMobileMenu()">✕</span>
+  <a href="#home" onclick="closeMobileMenu()">Home</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#technology" onclick="closeMobileMenu()">Technology</a>
+  <a href="#applications" onclick="closeMobileMenu()">Applications</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">
+    <div class="logo-icon">⚡</div>
+    <div class="logo-text">SIBC <span>Smart Infrastructure Bangladesh Consortium</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#technology">Technology</a></li>
+    <li><a href="#applications">Applications</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMobileMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-image-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="label">Bangladesh's Piezoelectric Energy Pioneer</span>
+      </div>
+      <h1 class="hero-title">
+        Powering Roads
+        <span class="accent">Into Energy</span>
+      </h1>
+      <p class="hero-sub">Transforming everyday infrastructure — roads, bridges, railways, and toll booths — into sustainable energy generation systems through advanced piezoelectric harvesting technology.</p>
+      <div class="hero-btns">
+        <a href="#technology" class="btn-primary">⚡ Explore Technology</a>
+        <a href="#contact" class="btn-secondary">🤝 Partner With Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">47<span class="stat-unit">kW</span></div><div class="stat-label">Per km road capacity</div></div>
+        <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Carbon emissions</div></div>
+        <div class="stat-item"><div class="stat-num">25<span class="stat-unit">yr</span></div><div class="stat-label">System lifespan</div></div>
+        <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Continuous generation</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE STRIP -->
+<div class="container" style="position:relative;z-index:2;">
+  <div class="img-strip reveal">
+    <div class="img-strip-item">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Highway road Bangladesh" loading="lazy">
+      <div class="img-label">🛣️ Highways</div>
+    </div>
+    <div class="img-strip-item">
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=80" alt="Bridge infrastructure" loading="lazy">
+      <div class="img-label">🌉 Bridges</div>
+    </div>
+    <div class="img-strip-item">
+      <img src="https://images.unsplash.com/photo-1474487548417-781cb6d646b3?w=700&q=80" alt="MRT Metro Rail" loading="lazy">
+      <div class="img-label">🚇 MRT & Metro</div>
+    </div>
+    <div class="img-strip-item">
+      <img src="https://images.unsplash.com/photo-1540228232483-1b64a7024923?w=700&q=80" alt="Railway tracks" loading="lazy">
+      <div class="img-label">🚂 Railways</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">// 01 — About Us</span>
+      <h2>Built for Bangladesh.<br>Built for the Future.</h2>
+      <p>Pioneering the integration of piezoelectric energy harvesting into Bangladesh's infrastructure ecosystem — turning every passing vehicle into an energy source.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p style="color:var(--text2);margin-bottom:1.25rem;">Smart Infrastructure Bangladesh Consortium (SIBC) is a forward-thinking engineering company dedicated to embedding clean energy generation directly into the physical infrastructure of Bangladesh. We believe the roads we travel, the bridges we cross, and the railways we use can do far more than connect — they can power our nation.</p>
+        <p style="color:var(--muted);margin-bottom:1.75rem;">Founded by engineers and sustainability advocates, SIBC partners with government bodies, infrastructure developers, and international agencies to deploy scalable piezoelectric systems across the country's growing transport network.</p>
+        <div class="vm-grid">
+          <div class="vm-card"><h4>🔭 Our Vision</h4><p>A Bangladesh where every kilometer of road and bridge span contributes to the nation's clean energy grid.</p></div>
+          <div class="vm-card"><h4>🎯 Our Mission</h4><p>To design, install, and maintain piezoelectric energy systems that transform transport infrastructure into distributed power plants.</p></div>
+          <div class="vm-card"><h4>🌿 Sustainability</h4><p>Zero-emission, low-maintenance energy harvesting complementing solar and wind in Bangladesh's renewable mix.</p></div>
+          <div class="vm-card"><h4>🏛️ National Impact</h4><p>Supporting SDG 7 & SDG 9 — affordable clean energy and resilient infrastructure for sustainable development.</p></div>
+        </div>
+      </div>
+      <div class="about-img-grid reveal">
+        <div class="about-img about-img-tall">
+          <img src="https://images.unsplash.com/photo-1518183214770-9cffbec72538?w=600&q=80" alt="Road infrastructure" loading="lazy">
+        </div>
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1474487548417-781cb6d646b3?w=600&q=80" alt="Rail infrastructure" loading="lazy">
+        </div>
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80" alt="Bridge span" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="technology" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">// 02 — Technology</span>
+      <h2>How Piezoelectric<br>Energy Harvesting Works</h2>
+      <p>Mechanical pressure from passing vehicles generates electrical energy through crystalline materials embedded in infrastructure.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="tech-diagram-wrap reveal">
+      <svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;width:100%;">
+        <defs>
+          <linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#0d47a1"/>
+            <stop offset="100%" style="stop-color:#29b6f6"/>
+          </linearGradient>
+          <marker id="arh" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1565c0"/></marker>
+        </defs>
+        <rect x="20" y="55" width="140" height="105" rx="10" fill="#fff" stroke="#1565c0" stroke-width="1.5"/>
+        <text x="90" y="92" text-anchor="middle" font-size="28">🚗</text>
+        <text x="90" y="118" text-anchor="middle" font-family="Arial" font-size="12" fill="#0d47a1" font-weight="700">VEHICLE</text>
+        <text x="90" y="136" text-anchor="middle" font-family="Arial" font-size="10" fill="#78909c">Applies pressure</text>
+        <path d="M165 107 L193 107" stroke="url(#pg)" stroke-width="2.5" marker-end="url(#arh)"/>
+        <text x="179" y="100" text-anchor="middle" font-family="Arial" font-size="8" fill="#0288d1" font-weight="700">FORCE</text>
+        <rect x="200" y="55" width="140" height="105" rx="10" fill="#fff" stroke="#1565c0" stroke-width="1.5"/>
+        <text x="270" y="92" text-anchor="middle" font-size="28">💎</text>
+        <text x="270" y="118" text-anchor="middle" font-family="Arial" font-size="11" fill="#0d47a1" font-weight="700">PIEZO CRYSTAL</text>
+        <text x="270" y="136" text-anchor="middle" font-family="Arial" font-size="9.5" fill="#78909c">Pressure → Voltage</text>
+        <path d="M345 107 L373 107" stroke="url(#pg)" stroke-width="2.5" marker-end="url(#arh)"/>
+        <text x="359" y="100" text-anchor="middle" font-family="Arial" font-size="8" fill="#00c853" font-weight="700">AC OUT</text>
+        <rect x="380" y="55" width="140" height="105" rx="10" fill="#fff" stroke="#1565c0" stroke-width="1.5"/>
+        <text x="450" y="92" text-anchor="middle" font-size="28">⚡</text>
+        <text x="450" y="118" text-anchor="middle" font-family="Arial" font-size="12" fill="#0d47a1" font-weight="700">CONVERTER</text>
+        <text x="450" y="136" text-anchor="middle" font-family="Arial" font-size="10" fill="#78909c">Rectifies &amp; stabilises</text>
+        <path d="M525 107 L553 107" stroke="url(#pg)" stroke-width="2.5" marker-end="url(#arh)"/>
+        <text x="539" y="100" text-anchor="middle" font-family="Arial" font-size="8" fill="#00c853" font-weight="700">DC OUT</text>
+        <rect x="560" y="55" width="220" height="105" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
+        <text x="670" y="92" text-anchor="middle" font-size="28">🔋</text>
+        <text x="670" y="118" text-anchor="middle" font-family="Arial" font-size="12" fill="#2e7d32" font-weight="700">STORAGE / GRID</text>
+        <text x="670" y="136" text-anchor="middle" font-family="Arial" font-size="10" fill="#78909c">Battery or national grid</text>
+        <rect x="20" y="175" width="760" height="30" rx="5" fill="rgba(13,71,161,0.06)" stroke="rgba(13,71,161,0.14)" stroke-width="1"/>
+        <text x="400" y="195" text-anchor="middle" font-family="Arial" font-size="9" fill="rgba(13,71,161,0.5)" font-weight="700" letter-spacing="3">— ROAD / BRIDGE / RAIL INFRASTRUCTURE LAYER —</text>
+        <circle cx="90" cy="175" r="3.5" fill="#0288d1"><animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="270" cy="175" r="3.5" fill="#0288d1"><animate attributeName="opacity" values="1;0.2;1" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+        <circle cx="450" cy="175" r="3.5" fill="#00c853"><animate attributeName="opacity" values="1;0.2;1" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+        <circle cx="670" cy="175" r="3.5" fill="#00c853"><animate attributeName="opacity" values="1;0.2;1" dur="2s" begin="1.5s" repeatCount="indefinite"/></circle>
+      </svg>
+      <p style="color:var(--muted);font-size:0.8rem;margin-top:1rem;font-family:Arial,sans-serif;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">PIEZOELECTRIC ENERGY CONVERSION FLOW DIAGRAM</p>
+    </div>
+
+    <div class="tech-flow reveal">
+      <div class="flow-step"><span class="flow-num">STEP 01</span><span class="flow-icon">🚛</span><h4>Mechanical Stress</h4><p>Vehicles, trains, and pedestrians apply mechanical pressure to the road or bridge surface.</p></div>
+      <div class="flow-step"><span class="flow-num">STEP 02</span><span class="flow-icon">💡</span><h4>Crystal Activation</h4><p>Piezoelectric crystals (PZT/PVDF) embedded in the pavement deform and generate a voltage differential.</p></div>
+      <div class="flow-step"><span class="flow-num">STEP 03</span><span class="flow-icon">🔌</span><h4>AC→DC Conversion</h4><p>Rectifier circuits convert the alternating output to stable direct current for storage or grid use.</p></div>
+      <div class="flow-step"><span class="flow-num">STEP 04</span><span class="flow-icon">🌐</span><h4>Distribution</h4><p>Energy flows into batteries, powers roadside lighting, or feeds directly into the national grid.</p></div>
+    </div>
+
+    <div class="tech-benefits reveal">
+      <div class="benefit-card"><div class="benefit-icon">♻️</div><h4>100% Renewable</h4><p>Harnesses kinetic energy already present in traffic — no fuel, no combustion, no emissions.</p></div>
+      <div class="benefit-card"><div class="benefit-icon">📈</div><h4>Fully Scalable</h4><p>Modular tile-based systems install on any road or bridge length, scaling output proportionally.</p></div>
+      <div class="benefit-card"><div class="benefit-icon">🔧</div><h4>Low Maintenance</h4><p>No moving parts above the road surface. Crystal arrays are sealed beneath load-bearing pavement panels.</p></div>
+      <div class="benefit-card"><div class="benefit-icon">🧠</div><h4>Smart & IoT-Ready</h4><p>Integrated sensors monitor energy output, traffic patterns, and structural health in real time.</p></div>
+      <div class="benefit-card"><div class="benefit-icon">🌙</div><h4>24/7 Generation</h4><p>Unlike solar, piezoelectric systems generate power day and night, rain or shine, whenever traffic flows.</p></div>
+      <div class="benefit-card"><div class="benefit-icon">🏙️</div><h4>Smart City Ready</h4><p>Sensor data powers traffic management, smart lighting, and emergency response systems.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section id="applications" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">// 03 — Applications</span>
+      <h2>Where the Technology Lives</h2>
+      <p>Four primary infrastructure domains where SIBC deploys piezoelectric harvesting systems across Bangladesh.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="apps-grid reveal">
+      <div class="app-card">
+        <div class="app-thumb">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Highway road" loading="lazy">
+          <div class="app-thumb-overlay"></div>
+          <div class="app-thumb-icon">🛣️</div>
+        </div>
+        <div class="app-body">
+          <h3>Roads & National Highways</h3>
+          <p>Bangladesh's national highway network handles millions of vehicles daily. Embedding piezoelectric modules beneath asphalt on high-traffic corridors like the Dhaka–Chittagong Highway generates electricity continuously and passively, powering roadside lighting, signage, and EV charging points locally.</p>
+          <div class="app-specs"><span class="spec-tag">Dhaka–Chittagong N1</span><span class="spec-tag">Dhaka–Sylhet N2</span><span class="spec-tag">Up to 47kW/km</span><span class="spec-tag">Grid-Fed</span></div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-thumb">
+          <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80" alt="Bridge infrastructure" loading="lazy">
+          <div class="app-thumb-overlay"></div>
+          <div class="app-thumb-icon">🌉</div>
+        </div>
+        <div class="app-body">
+          <h3>Bridges & Underpass Spans</h3>
+          <p>Bridge decks experience intense vibration from vehicle load and natural frequencies. SIBC installs piezoelectric arrays along bridge surfaces and expansion joints, generating power while simultaneously monitoring structural stress via embedded sensors across Bangladesh's major bridge network.</p>
+          <div class="app-specs"><span class="spec-tag">Meghna Bridge</span><span class="spec-tag">Jamuna Bridge</span><span class="spec-tag">Vibration Harvest</span><span class="spec-tag">Structural Monitoring</span></div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-thumb">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Toll booth highway" loading="lazy">
+          <div class="app-thumb-overlay"></div>
+          <div class="app-thumb-icon">🚧</div>
+        </div>
+        <div class="app-body">
+          <h3>Toll Booths & Plazas</h3>
+          <p>Toll booths are natural chokepoints where vehicles slow down, creating dense repeated load cycles. This concentration of mechanical energy makes toll plazas among the most efficient locations for piezoelectric harvesting with rapid ROI and minimal disruption to existing infrastructure.</p>
+          <div class="app-specs"><span class="spec-tag">Expressway Tolls</span><span class="spec-tag">High Load Density</span><span class="spec-tag">Fast ROI</span><span class="spec-tag">Self-Sufficient Booths</span></div>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-thumb">
+          <img src="https://images.unsplash.com/photo-1540228232483-1b64a7024923?w=800&q=80" alt="Railway tracks" loading="lazy">
+          <div class="app-thumb-overlay"></div>
+          <div class="app-thumb-icon">🚂</div>
+        </div>
+        <div class="app-body">
+          <h3>Railways & Transport Corridors</h3>
+          <p>Rail infrastructure generates enormous vibrational energy with every passing train. Heavy locomotives exert tremendous consistent force on rails and sleepers. SIBC's rail-integrated systems capture this energy to power station lighting, signalling systems, and wayside communication equipment.</p>
+          <div class="app-specs"><span class="spec-tag">Bangladesh Railway</span><span class="spec-tag">MRT Line Support</span><span class="spec-tag">Signal Powering</span><span class="spec-tag">Station Self-Power</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY BANGLADESH -->
+<section id="why-bd" class="section section-green">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">// 04 — Why Bangladesh Needs This</span>
+      <h2>The Right Solution<br>at the Right Time</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="why-bd-grid reveal">
+      <ul class="why-list">
+        <li><div class="why-check">✓</div><div><h4>Rapid Infrastructure Expansion</h4><p>Bangladesh is building thousands of km of roads, bridges, and railways under Vision 2041 — the ideal time to integrate harvesting systems from the ground up.</p></div></li>
+        <li><div class="why-check">✓</div><div><h4>High Traffic Density</h4><p>Dhaka is among the world's most congested cities. High vehicle density directly translates to higher energy yield from piezoelectric systems.</p></div></li>
+        <li><div class="why-check">✓</div><div><h4>Energy Security Imperative</h4><p>Bangladesh faces growing electricity demand with a significant gap in renewable supply. Road-embedded generation reduces dependence on fossil fuel imports.</p></div></li>
+        <li><div class="why-check">✓</div><div><h4>Smart City Development</h4><p>Government smart city initiatives in Dhaka, Chittagong, and Sylhet require integrated power and data infrastructure — exactly what SIBC provides.</p></div></li>
+        <li><div class="why-check">✓</div><div><h4>Climate Vulnerability</h4><p>As one of the most climate-vulnerable nations, Bangladesh's commitment to clean energy aligns perfectly with zero-emission piezoelectric systems.</p></div></li>
+      </ul>
+      <div class="why-infographic">
+        <div class="infographic-title">⚡ ENERGY POTENTIAL BY INFRASTRUCTURE TYPE</div>
+        <div class="bar-chart">
+          <div class="bar-item"><div class="bar-label"><span>National Highways (per 100km)</span><span>82%</span></div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div></div>
+          <div class="bar-item"><div class="bar-label"><span>Major Bridge Networks</span><span>75%</span></div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div></div>
+          <div class="bar-item"><div class="bar-label"><span>Rail Corridors</span><span>91%</span></div><div class="bar-track"><div class="bar-fill" style="width:91%"></div></div></div>
+          <div class="bar-item"><div class="bar-label"><span>Toll Plazas</span><span>95%</span></div><div class="bar-track"><div class="bar-fill" style="width:95%"></div></div></div>
+          <div class="bar-item"><div class="bar-label"><span>Urban Intersections</span><span>68%</span></div><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div></div>
+        </div>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:1.25rem;text-align:center;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Relative energy yield potential index (SIBC internal assessment)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">// 05 — Projects & Future Vision</span>
+      <h2>Conceptual Projects<br>for Bangladesh</h2>
+      <p>Our roadmap of pilot programs and full-scale deployment concepts across Bangladesh's infrastructure network.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="projects-grid reveal">
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Highway energy corridor" loading="lazy">
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <span class="project-status status-pilot">● Pilot Proposed</span>
+          <h4>Dhaka–Chittagong Highway Smart Energy Corridor</h4>
+          <p>Deploying piezoelectric modules across the first 10km of the N1 highway near Comilla. Target: 470kW capacity, powering highway lighting and rest stop facilities.</p>
+          <div class="project-meta"><span>N1 Highway</span><span>470kW Target</span><span>Phase 1: 2025</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Toll booth expressway" loading="lazy">
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <span class="project-status status-pilot">● Pilot Proposed</span>
+          <h4>Bangabandhu Expressway Toll Self-Sufficiency</h4>
+          <p>Redesigning toll plaza infrastructure with embedded harvesting panels so that all toll booth power needs are met entirely by the passing vehicles themselves.</p>
+          <div class="project-meta"><span>BEXT Expressway</span><span>Zero Energy Cost</span><span>2025–2026</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1474487548417-781cb6d646b3?w=600&q=80" alt="MRT metro rail Dhaka" loading="lazy">
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <span class="project-status status-concept">◌ Concept</span>
+          <h4>Dhaka MRT Rail Energy Recapture</h4>
+          <p>Partnering with Dhaka Mass Transit Company to deploy rail-bed piezoelectric harvesters along MRT Line 6, powering station lighting and signalling systems autonomously.</p>
+          <div class="project-meta"><span>MRT Line 6</span><span>Station Self-Power</span><span>2027 Vision</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80" alt="City smart road" loading="lazy">
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <span class="project-status status-concept">◌ Concept</span>
+          <h4>Dhaka Smart Road Urban Grid Project</h4>
+          <p>Integrating piezoelectric tiles at Dhaka's 20 highest-traffic intersections to generate local power for traffic signals, street lighting, and EV charging infrastructure.</p>
+          <div class="project-meta"><span>20 Intersections</span><span>Urban Grid</span><span>2027–2028</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1540228232483-1b64a7024923?w=600&q=80" alt="Railway Bangladesh" loading="lazy">
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <span class="project-status status-concept">◌ Concept</span>
+          <h4>Chittagong Port Freight Road Harvesting</h4>
+          <p>Heavy freight vehicles to and from Chittagong Port create extraordinary load cycles. A dedicated harvesting lane on the Port Road could generate significant industrial-grade power output.</p>
+          <div class="project-meta"><span>Chittagong Port</span><span>Heavy Freight Load</span><span>2028 Vision</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <img src="https://images.unsplash.com/photo-1518183214770-9cffbec72538?w=600&q=80" alt="Rural road Bangladesh" loading="lazy">
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <span class="project-status status-concept">◌ Concept</span>
+          <h4>Rural Electrification via LGED Road Network</h4>
+          <p>Working with LGED to embed harvesting modules in upazila road networks across rural Bangladesh, generating local power for community facilities and street lighting where grid access is limited.</p>
+          <div class="project-meta"><span>LGED Partnership</span><span>Rural Access</span><span>2028–2030</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="download-card reveal">
+      <div class="download-icon">📄</div>
+      <div class="download-text">
+        <h4>Project Proposal & Technical Brief</h4>
+        <p>Download our full project feasibility report and technical specifications for government and investor review.</p>
+      </div>
+      <div class="download-btns">
+        <a href="#contact" class="btn-primary" style="font-size:0.85rem;padding:0.7rem 1.4rem;">⬇ Request Full Report</a>
+        <a href="#contact" class="btn-green" style="font-size:0.85rem;padding:0.7rem 1.4rem;">📊 Investor Brief</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">// 06 — Services</span>
+      <h2>What We Offer</h2>
+      <p>End-to-end piezoelectric energy harvesting services — from feasibility analysis to installation, monitoring, and expansion.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card"><div class="service-icon">🏗️</div><div class="service-content"><h4>Infrastructure Integration</h4><p>We design and implement piezoelectric harvesting systems that integrate seamlessly into new or existing road, bridge, and railway infrastructure without compromising structural integrity or surface performance.</p></div></div>
+      <div class="service-card"><div class="service-icon">⚡</div><div class="service-content"><h4>Energy Harvesting Solutions</h4><p>Custom-engineered harvesting arrays using high-grade PZT and PVDF crystals, matched to specific traffic profiles, pavement types, and load conditions for maximum yield.</p></div></div>
+      <div class="service-card"><div class="service-icon">📐</div><div class="service-content"><h4>Consultation & Engineering Design</h4><p>Our engineering team provides full feasibility studies, energy yield modelling, ROI projections, and technical design documentation for government tenders and investor presentations.</p></div></div>
+      <div class="service-card"><div class="service-icon">🏛️</div><div class="service-content"><h4>Government Project Collaboration</h4><p>SIBC actively partners with the Roads & Highways Division, Bangladesh Bridge Authority, Bangladesh Railway, and LGED on infrastructure-scale deployments.</p></div></div>
+      <div class="service-card"><div class="service-icon">📡</div><div class="service-content"><h4>Smart Monitoring & IoT Systems</h4><p>Real-time energy production dashboards, structural health monitoring, and traffic analytics — all integrated into a unified smart infrastructure platform.</p></div></div>
+      <div class="service-card"><div class="service-icon">🔬</div><div class="service-content"><h4>Research & Development Partnership</h4><p>We collaborate with BUET, CUET, and international universities to advance piezoelectric materials science and Bangladesh-specific climate adaptation of harvesting systems.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <div class="container" style="position:relative;z-index:1;">
+    <span class="label" style="color:rgba(255,255,255,0.7);display:block;margin-bottom:0.75rem;">Ready to Transform Bangladesh's Infrastructure?</span>
+    <h2>Partner with SIBC Today</h2>
+    <p>Whether you're a government authority, infrastructure contractor, or impact investor — we're ready to build Bangladesh's energy future together.</p>
+    <div class="cta-btns">
+      <a href="#contact" class="btn-white">🤝 Become a Partner</a>
+      <a href="#projects" class="btn-outline-white">📋 View Our Projects</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">// 07 — Contact Us</span>
+      <h2>Let's Build the Future<br>Together</h2>
+      <p>Reach out for partnership enquiries, project proposals, investor information, or general enquiries about piezoelectric infrastructure.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <p style="color:var(--muted);margin-bottom:2rem;font-size:0.9rem;">We welcome enquiries from government agencies, engineering firms, investors, and academic institutions interested in sustainable infrastructure development.</p>
+        <div class="contact-detail">
+          <div class="contact-icon">📧</div>
+          <div class="contact-detail-text"><label>Email</label><span>sibc.sbehi@protonmail.com</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📞</div>
+          <div class="contact-detail-text"><label>Phone</label><span>+880 1516-785943</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <div class="contact-detail-text"><label>Head Office</label><span>Tejgaon Industrial Area,<br>Dhaka 1208, Bangladesh</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-detail-text"><label>Office Hours</label><span>Sunday–Thursday: 9:00 AM – 6:00 PM BST</span></div>
+        </div>
+        <div style="margin-top:1.5rem;padding:1.5rem;background:rgba(13,71,161,0.05);border:1.5px solid rgba(13,71,161,0.12);border-radius:10px;">
+          <p class="label" style="margin-bottom:0.5rem;">Our Partners</p>
+          <p style="font-size:0.82rem;color:var(--muted);">Open to collaboration with Roads & Highways Division · Bangladesh Bridge Authority · Bangladesh Railway · LGED · Smart Bangladesh Initiative · BUET & CUET · IFC · ADB · World Bank</p>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h4 style="color:var(--navy);margin-bottom:1.5rem;font-family:Arial,sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;">Send Us a Message</h4>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
+          <div class="form-group"><label>Organisation</label><input type="text" placeholder="Your organisation"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="your.email@organisation.com"></div>
+        <div class="form-group">
+          <label>Enquiry Type</label>
+          <select>
+            <option value="">Select enquiry type...</option>
+            <option>Government / Regulatory</option>
+            <option>Investment Enquiry</option>
+            <option>Engineering Partnership</option>
+            <option>Project Proposal</option>
+            <option>Academic Collaboration</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project or how you'd like to partner with SIBC..."></textarea></div>
+        <button class="btn-primary form-submit" onclick="handleFormSubmit(this)">⚡ Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="nav-logo" style="display:inline-flex;margin-bottom:0;">
+          <div class="logo-icon">⚡</div>
+          <div class="footer-logo-text">SIBC <span>Smart Infrastructure Bangladesh Consortium</span></div>
+        </a>
+        <p>Transforming everyday infrastructure into sustainable energy sources. Pioneering piezoelectric energy harvesting across Bangladesh's transport network.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" title="LinkedIn">in</a>
+          <a href="#" class="social-btn" title="Twitter">𝕏</a>
+          <a href="#" class="social-btn" title="Facebook">f</a>
+          <a href="#" class="social-btn" title="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#about">Vision & Mission</a></li>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#contact">Careers</a></li>
+          <li><a href="#contact">Press & Media</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Technology</h5>
+        <ul>
+          <li><a href="#technology">How It Works</a></li>
+          <li><a href="#applications">Roads</a></li>
+          <li><a href="#applications">Bridges</a></li>
+          <li><a href="#applications">Railways</a></li>
+          <li><a href="#applications">Toll Systems</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Engage</h5>
+        <ul>
+          <li><a href="#projects">Our Projects</a></li>
+          <li><a href="#contact">Partner With Us</a></li>
+          <li><a href="#contact">Investor Relations</a></li>
+          <li><a href="#contact">Request Proposal</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Smart Infrastructure Bangladesh Consortium. All rights reserved.</p>
+      <span class="label" style="color:rgba(255,255,255,0.4);">Powering Roads Into Energy — Made in Bangladesh 🇧🇩</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openMobileMenu(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
+
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach((entry,i)=>{if(entry.isIntersecting)setTimeout(()=>entry.target.classList.add('visible'),i*80);});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('mainNav');
+  nav.style.padding=window.scrollY>60?'0.7rem 2rem':'1rem 2rem';
+});
+
+function handleFormSubmit(btn){
+  btn.textContent='✓ Message Sent!';
+  btn.style.background='linear-gradient(135deg,#2e7d32,#43a047)';
+  btn.disabled=true;
+  setTimeout(()=>{btn.textContent='⚡ Send Message';btn.style.background='';btn.disabled=false;},4000);
+}
+
+function animateCounters(){
+  document.querySelectorAll('.stat-num').forEach(el=>{
+    const text=el.textContent;
+    const match=text.match(/[\d.]+/);
+    if(!match)return;
+    const target=parseFloat(match[0]);
+    const suffix=text.replace(match[0],'');
+    let start=0;
+    const step=(ts)=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/1800,1);
+      const e=1-Math.pow(1-p,3);
+      const cur=Math.round(e*target*10)/10;
+      el.innerHTML=(Number.isInteger(target)?Math.round(cur):cur)+suffix;
+      if(p<1)requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+const heroObs=new IntersectionObserver((entries)=>{
+  if(entries[0].isIntersecting){animateCounters();heroObs.disconnect();}
+},{threshold:0.5});
+heroObs.observe(document.querySelector('.hero-stats'));
+</script>
+</body>
+</html>
